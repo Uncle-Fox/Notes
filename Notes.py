@@ -15,6 +15,9 @@ def load():
         return notes
     except FileNotFoundError:
         return {}
+    except json.JSONDecodeError:
+        print("Ошибка при загрузке файла JSON. Файл поврежден или имеет неверный формат.")
+        return {}
 
 def showAll(notes):
     if(notes):
@@ -60,7 +63,7 @@ def showDate(notes):
 def show_note_body(notes, note_id):
     try:
         if note_id in notes:
-            print(f"Заметка № {note_id}:")
+            print(f"Заметка № {note_id}: {notes[note_id]['titleNote']}")
             print(notes[note_id]['bodyNote'])
             print()
         else:
